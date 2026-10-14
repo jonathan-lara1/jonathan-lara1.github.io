@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jonathan Lara Portfolio</title>
+<meta name="description" content="Jonathan Lara — Graphic Sr. en Cheil Colombia. Diseño gráfico, publicidad y copywriting. Bogotá, Colombia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Azeret+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: utility bar + index-style filter row + 3-col work grid, captions as mono data lines; info block at the foot. */
+:root{
+  --bg:#eceef1;
+  --fg:#0c0d10;
+  --muted:#5d6370;
+  --line:#c9cdd4;
+  --tile:#dde0e5;
+  --accent:#2438ff;
+  --on-accent:#ffffff;
+  --display:"Archivo","Arial Narrow",Helvetica,sans-serif;
+  --mono:"Azeret Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --gut:clamp(16px,2vw,28px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c0d10;--fg:#e8eaee;--muted:#8a909c;--line:#262a31;--tile:#171a1f;--accent:#6b7bff;--on-accent:#0c0d10;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c0d10;--fg:#e8eaee;--muted:#8a909c;--line:#262a31;--tile:#171a1f;--accent:#6b7bff;--on-accent:#0c0d10;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.02em;text-transform:uppercase;padding-inline:var(--gut);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-transform:inherit;letter-spacing:inherit}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:grid;grid-template-columns:auto 1fr auto;gap:12px 24px;align-items:start;padding-block:14px;border-bottom:1px solid var(--line)}
+.mark{font-family:var(--display);font-weight:900;font-variation-settings:"wdth" 62;font-size:28px;line-height:.8;letter-spacing:-.01em}
+.mark sup{font-family:var(--mono);font-size:9px;font-weight:500;vertical-align:top;margin-left:2px}
+.clocks{display:flex;flex-wrap:wrap;gap:4px 28px}
+.clock{display:grid;gap:0}
+.clock span:first-child{color:var(--muted)}
+.clock b{font-weight:500;font-variant-numeric:tabular-nums}
+.nav{display:flex;gap:18px;align-items:start;flex-wrap:wrap;justify-content:end}
+.nav a,.nav button{position:relative}
+.nav a:hover,.nav button:hover{color:var(--accent)}
+.nav .on::before{content:"● ";color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(28px,6vw,72px) clamp(20px,3vw,36px);display:grid;gap:18px}
+.name{margin:0;font-family:var(--display);font-weight:900;font-variation-settings:"wdth" 62;font-size:clamp(64px,17vw,260px);line-height:.78;letter-spacing:-.02em;text-transform:uppercase;text-wrap:balance}
+.name .x{color:var(--accent)}
+.lede{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 24px;border-top:1px solid var(--fg);padding-top:10px}
+.lede p{margin:0;max-width:44ch}
+.lede .k{color:var(--muted);display:block}
+.avail::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:1px;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* ---------- filters ---------- */
+.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--barH,64px));z-index:10;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px 22px;padding-block:12px;border-bottom:1px solid var(--line);align-items:center}
+.filters .count{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+.chk{display:inline-flex;gap:7px;align-items:center;cursor:pointer;user-select:none}
+.chk input{position:absolute;opacity:0;pointer-events:none}
+.chk .box{width:11px;height:11px;border:1px solid var(--fg);display:inline-grid;place-items:center}
+.chk input:checked + .box{background:var(--fg)}
+.chk input:checked + .box::after{content:"";width:5px;height:5px;background:var(--bg)}
+.chk:hover{color:var(--accent)}
+.chk:hover .box{border-color:var(--accent)}
+.chk sup{color:var(--muted);font-size:9px}
+
+/* ---------- grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,40px) clamp(12px,1.6vw,20px);padding-block:clamp(20px,3vw,32px) 64px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{display:grid;gap:8px;min-width:0}
+.card[hidden]{display:none!important}
+.media{position:relative;aspect-ratio:808/632;max-width:100%;background:var(--tile);overflow:hidden}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s}
+.fallback{position:absolute;inset:0;display:none;padding:14px;flex-direction:column;justify-content:space-between;background:var(--tile)}
+.media.noimg .fallback{display:flex}
+.media.noimg img{display:none}
+.fallback .ft{font-family:var(--display);font-weight:900;font-variation-settings:"wdth" 62;font-size:clamp(34px,4.2vw,58px);line-height:.82;letter-spacing:-.01em;text-wrap:balance;overflow-wrap:anywhere}
+.fallback .fc{color:var(--muted)}
+.over{position:absolute;inset:auto 0 0 0;padding:8px 10px;background:var(--accent);color:var(--on-accent);display:flex;justify-content:space-between;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.card:hover .over,.card:focus-visible .over{transform:none}
+.card:hover .media img{transform:scale(1.04)}
+.cap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:baseline}
+.cap .n{color:var(--muted);font-variant-numeric:tabular-nums}
+.cap .t{font-weight:500;overflow-wrap:anywhere}
+.cap .v{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--muted);padding-left:calc(3ch + 10px)}
+.meta i{font-style:normal}
+.meta i + i::before{content:"/ ";margin-right:2px}
+.card:hover .cap .t{color:var(--accent)}
+
+/* ---------- info ---------- */
+.info{border-top:1px solid var(--fg);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 20px;padding-block:28px 56px}
+.info h2{grid-column:1/-1;margin:0;font-family:var(--display);font-weight:900;font-variation-settings:"wdth" 62;font-size:clamp(48px,10vw,150px);line-height:.8;letter-spacing:-.02em}
+.col{min-width:0;display:grid;gap:10px;align-content:start}
+.c-bio{grid-column:span 5}
+.c-stats{grid-column:span 3}
+.c-contact{grid-column:span 4}
+@media (max-width:860px){.c-bio,.c-stats,.c-contact{grid-column:1/-1}}
+.col h3{margin:0;font-size:12px;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px}
+.bio{text-transform:none;font-size:14px;line-height:1.6;letter-spacing:0;margin:0;max-width:60ch}
+.stats{display:grid;gap:0}
+.stats div{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-block:6px}
+.stats b{font-weight:500;font-variant-numeric:tabular-nums}
+.line{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-block:6px;flex-wrap:wrap}
+.line .val{text-transform:none;user-select:all;overflow-wrap:anywhere;min-width:0}
+.copy{border:1px solid var(--fg);padding:3px 8px}
+.copy:hover{background:var(--fg);color:var(--bg)}
+.skills{display:flex;flex-wrap:wrap;gap:6px}
+.skills span{border:1px solid var(--line);padding:3px 8px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-block:14px 24px;color:var(--muted)}
+@media (max-width:640px){
+  .bar{grid-template-columns:auto 1fr}
+  .clocks{display:none}
+  .nav{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a href="#work" class="mark" aria-label="Jonathan Lara, inicio">J/L<sup>®</sup></a>
+  <div class="clocks" aria-label="Hora local">
+    <div class="clock"><span>Bogotá</span><b data-tz="America/Bogota">--:--</b></div>
+    <div class="clock"><span>Ciudad de México</span><b data-tz="America/Mexico_City">--:--</b></div>
+    <div class="clock"><span>Madrid</span><b data-tz="Europe/Madrid">--:--</b></div>
+  </div>
+  <nav class="nav">
+    <a href="#work" class="on">Work</a>
+    <a href="#info">Info</a>
+    <a href="#contacto">Contacto</a>
+    <button type="button" id="mode" aria-pressed="false">Dark mode/<span id="modeState">Off</span></button>
+  </nav>
+</header>
+
+<section class="hero" aria-label="Presentación">
+  <h1 class="name">Jonathan<br>Lara<span class="x">*</span></h1>
+  <div class="lede">
+    <p><span class="k">Rol</span>Graphic Sr. — Cheil Colombia</p>
+    <p><span class="k">Disciplinas</span>Diseño gráfico / Publicidad / Copywriting</p>
+    <p><span class="k">Base</span>Bogotá, Colombia (GMT−5)</p>
+    <p><span class="k">Estado</span><span class="avail">Disponible tiempo completo</span></p>
+  </div>
+</section>
+
+<main id="work">
+  <div class="filters" id="filters" role="radiogroup" aria-label="Filtrar proyectos"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<section class="info" id="info">
+  <h2>Info</h2>
+  <div class="col c-bio">
+    <h3>Perfil</h3>
+    <p class="bio">Diseñador gráfico senior en Cheil Colombia. Trabajo en la cocina de campañas para marcas como Xbox, Orbit, Claro, Oreo, Reebok y Credibanco: piezas de social, lanzamientos de marca, activaciones y casos para festivales como El Ojo de Iberoamérica. La mayoría de estos proyectos son trabajo en equipo de agencia; los créditos completos están en cada caso de Behance.</p>
+    <div class="skills"><span>Dirección gráfica</span><span>Key visual</span><span>Social content</span><span>Case films</span><span>Branding</span><span>Copywriting</span></div>
+  </div>
+  <div class="col c-stats">
+    <h3>Behance</h3>
+    <div class="stats">
+      <div><span>Vistas</span><b>8.912</b></div>
+      <div><span>Apreciaciones</span><b>803</b></div>
+      <div><span>Proyectos</span><b id="statN">18</b></div>
+      <div><span>Miembro desde</span><b>04.2020</b></div>
+    </div>
+  </div>
+  <div class="col c-contact" id="contacto">
+    <h3>Contacto</h3>
+    <div class="line"><span class="val" id="mail">jonathanlara825@gmail.com</span><button class="copy" type="button" data-copy="mail">Copiar</button></div>
+    <div class="line"><span class="val" id="tel">+57 320 878 5235</span><button class="copy" type="button" data-copy="tel">Copiar</button></div>
+    <div class="line"><a class="val" href="https://www.behance.net/jonathanlara3" target="_blank" rel="noopener">behance.net/jonathanlara3 ↗</a></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>© <span id="yr">2026</span> Jonathan Lara</span>
+  <span>Bogotá (CO)</span>
+  <a href="#bar">Volver arriba ↑</a>
+</footer>
+
+<script>
+const B="https://mir-s3-cdn-cf.behance.net/projects/404/";
+const G="https://www.behance.net/gallery/";
+/* cats: campana, social, experiencia, branding, ojo */
+const P=[
+ {t:"Officially Doomed",c:"Xbox — DOOM",img:"97e929225994745.Y3JvcCw4MDgsNjMyLDAsMA.png",u:"225994745/Officially-Doomed-XBOX-DOOM",a:140,v:1183,k:["campana","social"],f:1},
+ {t:"Control To Chew",c:"Orbit Extra",img:"416d99225072437.Y3JvcCwxMzE0LDEwMjcsMCwz.jpg",u:"225072437/Control-To-Chew-Orbit-Extra",a:193,v:1609,k:["campana","experiencia"],f:1},
+ {t:"Así sonó el Mundial 2026",c:"Mundial 2026",y:2026,img:"ce6303255347455.Y3JvcCwxNjE2LDEyNjQsMCw0.png",u:"255347455/Asi-sono-el-Mundial-2026",a:26,v:110,k:["campana","social"],f:1},
+ {t:"#LaMagiaDeConectarnos",c:"Claro",img:"676457135025425.Y3JvcCwzMzUxLDI2MjEsMCww.jpg",u:"135025425/Claro-LaMagiaDeConectarnos",a:272,v:2893,k:["campana"],f:1},
+ {t:"Museo de los que no votaron",c:"Ojo de Iberoamérica",y:2023,img:"58a384189302861.Y3JvcCw4MDgsNjMyLDAsMA.png",u:"189302861/Museo-de-los-que-no-votaron-Ojo-de-Iberoamrica-2023",a:13,v:405,k:["experiencia","ojo"],f:1},
+ {t:"Juegos Olímpicos",c:"Claro",y:2021,img:"2357e1131850901.Y3JvcCwxMjAwLDkzOCwwLDA.png",u:"131850901/JUEGOS-OLIMPICOS-CLARO-2021",a:21,v:659,k:["campana","social"],f:1},
+ {t:"Pasión por tu pelo",c:"Ojo de Iberoamérica",y:2023,img:"3411cf187047695.Y3JvcCwxMDgwLDg0NCwwLDkz.jpg",u:"187047695/Pasion-por-tu-pelo-El-Ojo-de-Iberoamrica-2023",a:10,v:329,k:["campana","ojo"]},
+ {t:"Las que no sobrevivieron al 2021",c:"Social",y:2021,img:"658dee137660657.Y3JvcCwxMjAwLDkzOCwwLDA.png",u:"137660657/Las-que-no-sobrevivieron-al-2021",a:13,v:180,k:["social"]},
+ {t:"Rewind Bar",c:"Claro Música",img:"8be4ea100876769.Y3JvcCwxMjAwLDkzOCwwLDA.png",u:"100876769/Rewind-Bar-by-Claro-musica",a:16,v:361,k:["experiencia"]},
+ {t:"Juega con Oreo",c:"Oreo",img:"5e6e77136372301.Y3JvcCwxMjAwLDkzOCwwLDA.png",u:"136372301/Juega-Con-Oreo",a:7,v:223,k:["social"]},
+ {t:"En Navidad tu familia es primero",c:"Navidad",img:"7d043a103295261.6262c389b77cb.jpg",u:"103295261/En-Navidad-tu-familia-es-primero",a:1,v:218,k:["campana"]},
+ {t:"Negocios Homónimos",c:"Claro Empresas",img:"8bd471154527473.Y3JvcCw5OTksNzgyLDAsMA.png",u:"154527473/Negocios-Homonimos-Claro-empresas",a:3,v:117,k:["campana"]},
+ {t:"Tap To Phone",c:"Credibanco",y:2022,img:"68c728219140161.Y3JvcCwxMDAzLDc4NSwwLDA.png",u:"219140161/Tap-To-Phone-by-Credibanco-2022",a:0,v:38,k:["campana"]},
+ {t:"El poder de la unión",c:"Copiloto",y:2023,img:"7eae98219152753.Y3JvcCwxMDI4LDgwNCwyNSwyMA.png",u:"219152753/El-poder-de-la-union-Copiloto-2023",a:1,v:37,k:["campana"]},
+ {t:"Reebok Academy",c:"Reebok",img:"d8a9fd134972261.Y3JvcCwxMjAwLDkzOCwwLDA.png",u:"134972261/Reebok-Academy",a:0,v:36,k:["social","branding"]},
+ {t:"Lanzamiento de marca CCO",c:"CCO",y:2022,img:"49a965219147101.Y3JvcCw0ODUsMzc5LDQ2MiwyMDY.png",u:"219147101/Lanzamiento-de-marca-CCO-2022",a:0,v:21,k:["branding"]},
+ {t:"Smart Hospitality",c:"Smart Hospitality",y:2024,img:"09390e219219483.Y3JvcCwxMDA0LDc4NiwxOTYsMA.png",u:"219219483/Smart-Hospitality-2024",a:0,v:17,k:["branding"]},
+ {t:"Negocios a otro nivel",c:"B2B",y:2023,img:"f0c452219223405.Y3JvcCwyMDY0LDE2MTUsNDA4LDA.png",u:"219223405/Negocios-a-otro-nivel-2023",a:0,v:16,k:["campana"]}
+];
+const CATS=[["todo","Todo"],["destacados","Destacados"],["campana","Campaña"],["social","Social"],["experiencia","Experiencia"],["branding","Branding"],["ojo","El Ojo de Iberoamérica"]];
+const nf=new Intl.NumberFormat("es-CO");
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const labels={campana:"Campaña",social:"Social",experiencia:"Experiencia",branding:"Branding",ojo:"El Ojo"};
+
+const grid=document.getElementById("grid");
+grid.innerHTML=P.map((p,i)=>`
+<a class="card" href="${G+p.u}" target="_blank" rel="noopener" data-k="${p.k.join(" ")}${p.f?" destacados":""}">
+  <div class="media">
+    <img src="${B+p.img}" alt="${esc(p.t)} — ${esc(p.c)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg')">
+    <div class="fallback" aria-hidden="true"><span class="fc">${esc(p.c)}${p.y?" — "+p.y:""}</span><span class="ft">${esc(p.t)}</span></div>
+    <div class="over"><span>Ver caso</span><span>Behance ↗</span></div>
+  </div>
+  <div class="cap"><span class="n">${String(i+1).padStart(2,"0")}</span><span class="t">${esc(p.t)}</span><span class="v">${nf.format(p.v)} vistas</span></div>
+  <div class="meta"><i>${esc(p.c)}</i>${p.y?`<i>${p.y}</i>`:""}${p.k.map(k=>`<i>${labels[k]}</i>`).join("")}</div>
+</a>`).join("");
+/* images that already failed before handler bound */
+grid.querySelectorAll("img").forEach(img=>{if(img.complete&&img.naturalWidth===0)img.parentNode.classList.add("noimg")});
+
+const cards=[...grid.children];
+const cnt=k=>k==="todo"?P.length:cards.filter(c=>c.dataset.k.split(" ").includes(k)).length;
+const F=document.getElementById("filters");
+F.innerHTML=CATS.map(([k,l],i)=>`<label class="chk"><input type="radio" name="cat" id="cat-${k}" value="${k}" ${i===0?"checked":""}><span class="box"></span>${l}<sup>${cnt(k)}</sup></label>`).join("")+`<span class="count" id="count"></span>`;
+const countEl=document.getElementById("count");
+function apply(k){
+  let n=0;
+  cards.forEach(c=>{const on=k==="todo"||c.dataset.k.split(" ").includes(k);c.hidden=!on;if(on)n++});
+  countEl.textContent=`${String(n).padStart(2,"0")} / ${String(P.length).padStart(2,"0")} proyectos`;
+  try{localStorage.setItem("jl-cat",k)}catch(e){}
+}
+F.addEventListener("change",e=>{if(e.target.name==="cat")apply(e.target.value)});
+let start="todo";
+try{const s=localStorage.getItem("jl-cat");if(s&&CATS.some(c=>c[0]===s))start=s}catch(e){}
+const r=document.getElementById("cat-"+start);if(r)r.checked=true;
+apply(start);
+
+/* clocks */
+function tick(){
+  document.querySelectorAll("[data-tz]").forEach(el=>{
+    el.textContent=new Intl.DateTimeFormat("es-CO",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:el.dataset.tz}).format(new Date());
+  });
+}
+tick();setInterval(tick,15000);
+document.getElementById("yr").textContent=new Date().getFullYear();
+
+/* sticky offset for filters */
+const bar=document.getElementById("bar");
+const setH=()=>document.documentElement.style.setProperty("--barH",bar.offsetHeight+"px");
+setH();addEventListener("resize",setH);
+
+/* dark mode toggle */
+const root=document.documentElement,btn=document.getElementById("mode"),st=document.getElementById("modeState");
+const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+function sync(){const d=isDark();st.textContent=d?"On":"Off";btn.setAttribute("aria-pressed",String(d))}
+btn.addEventListener("click",()=>{root.dataset.theme=isDark()?"light":"dark";sync()});
+sync();
+
+/* copy */
+document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
+  const el=document.getElementById(b.dataset.copy);
+  const done=()=>{b.textContent="Copiado";setTimeout(()=>b.textContent="Copiar",1600)};
+  if(navigator.clipboard){navigator.clipboard.writeText(el.textContent.trim()).then(done,()=>{getSelection().selectAllChildren(el)})}
+  else getSelection().selectAllChildren(el);
+}));
+</script>
+</body>
+</html>
